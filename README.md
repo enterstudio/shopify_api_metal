@@ -1,8 +1,24 @@
-# ShopifyApiMetal
+# ShopifyApi::Metal
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/shopify_api_metal`. To experiment with that code, run `bin/console` for an interactive prompt.
+The official ShopifyAPI gem works well if you are writing a private app. However, if you are
+writing an app that works with multiple shops, it doesn't work so well. The official client
+was written using ActiveResource, and ActiveResource was never designed for multiple stores.
 
-TODO: Delete this and the text above, and describe your gem
+Furthermore, the Shopify API rate limit uses custom headers to inform the client when things
+are getting close.
+
+Finally, for some apps, a representation layer is not necessary.
+
+This is an UNOFFICIAL gem. It is not written by Shopify. This gem is intended to:
+
+1. Thread-safe, without resorting to thread-safe class attributes
+2. Built on Faraday, so that backends and middleware can be customized
+3. Stay in it's own namespace so you can run this along side the official gem
+
+What this gem will not do:
+
+1. Convert data into resource objects. Use [roarify https://github.com/fighella/roarify] if you need that.
+2. Solve all your problems. This was written for Shopapps for our needs. We welcome Pull Requests though, and may expand the scope of the project.
 
 ## Installation
 
