@@ -1,5 +1,2 @@
-require "shopify_api_metal/version"
-
-module ShopifyApiMetal
-  # Your code goes here...
-end
+require 'shopify_api/metal/version'
+require 'shopify_api/metal'
