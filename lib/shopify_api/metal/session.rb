@@ -1,5 +1,6 @@
 require 'faraday'
 require 'faraday_middleware'
+require 'faraday/request'
 
 module ShopifyAPI
   module Metal
@@ -7,14 +8,18 @@ module ShopifyAPI
     class Session
 
       class << self
-        def connection(domain, token, debug = false)
+        def connection(domain, token: nil, api_key: nil, password: nil, debug: false)
+          fail ArgumentError, "Require token or (api_key and password)" unless token || (api_key && password)
           Faraday.new("https://#{domain}/admin") do |f|
-            f.request  :shopify_oauth, token
+            if token
+              f.request :shopify_oauth, token
+            else
+              f.request :basic_auth, api_key, password
+            end
+
             f.request  :json
-
-            f.response :json
-
             f.request  :debug if debug
+            f.response :json
             f.adapter Faraday.default_adapter
           end
         end
